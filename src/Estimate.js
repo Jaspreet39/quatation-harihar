@@ -1,4 +1,4 @@
-import { Label, Select, TextInput } from "flowbite-react";
+import { Button, Label, Select, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import { carcases, Drawer, Shelf, Shutter, visible } from "./constant";
 
@@ -134,9 +134,15 @@ function Estimate() {
             <h1 className="text-2xl text-white font-serif font-semibold">
               Total Payment is
             </h1>
-            <p className="text-2xl text-white font-serif font-semibold text-center">
-              Rs.<spam className="font-normal">{rupee}</spam>
-            </p>
+            {charge.length > 0 ? (
+              <p className="text-2xl text-white font-serif font-semibold text-center">
+                Rs.<spam className="font-normal">{rupee}</spam>
+              </p>
+            ) : (
+              <p className="text-2xl text-white font-serif font-semibold text-center">
+                Rs.<spam className="font-normal">0</spam>
+              </p>
+            )}
           </div>
           <div className="h-[1px] w-[70%] bg-white" />
           <div className="flex items-center justify-between space-x-10">
@@ -149,6 +155,7 @@ function Estimate() {
               <p className="text-lg text-white font-serif ">18%</p>
             </div>
           </div>
+          <Button onClick={() => setCharge([])}>Reset</Button>
         </div>
       </div>
     </div>
