@@ -11,7 +11,11 @@ function Estimate() {
     const fittingCharges = sqFeet * 150;
     const misCharges = sqFeet * 75;
     console.log(charge);
-    setCharge((d) => [...d, e]);
+    if (charge.length > 4) {
+      alert("you cannot add more");
+    } else {
+      setCharge((d) => [...d, e]);
+    }
     const sum = charge.map((item) => parseInt(item)).reduce((p, a) => p + a, 0);
     const totalAmmount = sum * sqFeet + fittingCharges + misCharges;
     const less = 5 / 100;
