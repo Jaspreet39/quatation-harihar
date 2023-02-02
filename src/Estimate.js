@@ -4,7 +4,6 @@ import { carcases, Drawer, Shelf, Shutter, visible } from "./constant";
 
 function Estimate() {
   const [charge, setCharge] = useState([]);
-  const [carcase, setCarcase] = useState("");
   const [sqFeet, setSqFeet] = useState(0);
   const [rupee, setRupee] = useState(0);
 
@@ -32,7 +31,10 @@ function Estimate() {
             Apply for quotation in minutes
           </p>
         </div>
-        <div className="xl:w-[60%] md:w-[60%] w-[100%] bg-[#30355A] px-3 py-5 space-y-3">
+        <form
+          id="form"
+          className="xl:w-[60%] md:w-[60%] w-[100%] bg-[#30355A] px-3 py-5 space-y-3"
+        >
           <div className="w-full space-y-2">
             <div className="mb-2 block">
               <Label htmlFor="sqFeet" value="Square Feet" className="text-xl" />
@@ -121,7 +123,7 @@ function Estimate() {
               ))}
             </Select>
           </div>
-        </div>
+        </form>
       </div>
       <div className="col-span-1 flex items-center justify-center">
         <div className="bg-[#30355A] h-[400px] w-[400px] shadow-md xl:rounded-2xl md:rounded-2xl flex flex-col items-center justify-center space-y-4">
@@ -155,7 +157,14 @@ function Estimate() {
               <p className="text-lg text-white font-serif ">18%</p>
             </div>
           </div>
-          <Button onClick={() => setCharge([])}>Reset</Button>
+          <Button
+            onClick={() => {
+              setCharge([]);
+              document.getElementById("form").reset();
+            }}
+          >
+            Reset
+          </Button>
         </div>
       </div>
     </div>
