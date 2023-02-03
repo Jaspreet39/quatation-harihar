@@ -6,12 +6,12 @@ function Bottombar() {
   const PN = location.pathname;
   const navigate = useNavigate();
   return (
-    <div className="fixed w-full z-20 bottom-0 bg-white h-[50px] xl:hidden md:hidden">
+    <div className="fixed w-full z-20 bottom-0 bg-[#fff] h-[50px] xl:hidden md:hidden">
       <div className="flex items-center justify-around h-full w-full">
         <h1
           onClick={() => navigate("/")}
           className={` px-1 py-2 rounded-md ${
-            PN === "/" && "bg-[#30355A] text-white  font-semibold"
+            PN === "/" && "bg-[#232949] text-white  font-semibold"
           }`}
         >
           Outer-Quotion
@@ -19,7 +19,7 @@ function Bottombar() {
         <h1
           onClick={() => navigate("/hettich")}
           className={` px-1 py-2 rounded-md ${
-            PN === "/hettich" && "bg-[#30355A] text-white  font-semibold"
+            PN === "/hettich" && "bg-[#232949] text-white  font-semibold"
           }`}
         >
           Hettich-Quotion
