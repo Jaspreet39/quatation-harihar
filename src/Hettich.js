@@ -1,26 +1,44 @@
-import { Button, Label, Select, TextInput } from "flowbite-react";
+import { Button, Label, Radio, Select, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 import Bottombar from "./assets/Bottombar";
-import { carcases, Drawer, Shelf, Shutter, visible } from "./constant";
+import {
+  carcases,
+  Drawer,
+  FlatFittingType,
+  flpStay,
+  foldingSystem,
+  hingeType,
+  intermatHinge,
+  liftUp,
+  onsysHinge,
+  sensysHinge,
+  Shelf,
+  Shutter,
+  slidingAndFoldingSystem,
+  visible,
+} from "./constant";
 import Sidebar from "./Sidebar";
 
-function Estimate() {
-  const [charge, setCharge] = useState([]);
+function Hettich() {
+  const [charge, setCharge] = useState(0);
   const [sqFeet, setSqFeet] = useState(0);
   const [rupee, setRupee] = useState(0);
+  const [hinge, setHinge] = useState("Onsys Hinges");
+  const [FlapFillting, setFlapFillting] = useState("Lift Up - Top Box Lift");
 
   const totalValue = (e) => {
-    const fittingCharges = sqFeet * 150;
-    const misCharges = sqFeet * 75;
-    console.log(sqFeet);
-    if (charge.length > 4) {
-      alert("you cannot add more");
-    } else {
-      setCharge((d) => [...d, e]);
-    }
-    const sum = charge.map((item) => parseInt(item)).reduce((p, a) => p + a, 0);
-    const totalAmmount = sum * sqFeet + fittingCharges + misCharges;
-    const less = 5 / 100;
+    // const fittingCharges = sqFeet * 150;
+    // const misCharges = sqFeet * 75;
+    // console.log(charge);
+    // if (charge.length > 3) {
+    //   alert("you cannot add more");
+    // } else {
+    //   setCharge((d) => [...d, e]);
+    // }
+    // const sum = charge.map((item) => parseInt(item)).reduce((p, a) => p + a, 0);
+    setCharge(e);
+    const totalAmmount = e;
+    const less = 35 / 100;
     const GST = 18 / 100;
     const discount = totalAmmount - totalAmmount * less;
     const totalValue = setRupee(discount + discount * GST);
@@ -58,37 +76,98 @@ function Estimate() {
                 id="form"
                 className="xl:w-[60%] md:w-[60%] w-[100%] bg-[#30355A] px-3 py-5 space-y-3"
               >
-                <div className="w-full space-y-2">
-                  <div className="mb-2 block">
-                    <Label
-                      htmlFor="sqFeet"
-                      value="Square Feet"
-                      className="text-xl"
-                    />
-                  </div>
-                  <TextInput
-                    id="sqFeet"
-                    type="number"
-                    min={0}
-                    placeholder="Enter SQ/Feet"
-                    required={true}
-                    onChange={(e) => setSqFeet(e.target.value)}
-                  />
-                </div>
+                <fieldset
+                  className="flex items-center justify-around gap-4 space-y-2"
+                  id="radio"
+                >
+                  <legend className="text-white">Choose your Hinge</legend>
+                  {hingeType.map((item) => (
+                    <div className="flex items-center gap-2">
+                      <Radio
+                        id={item.id}
+                        name="hinges"
+                        value={item.id}
+                        defaultChecked={true}
+                        onClick={() => setHinge(item.title)}
+                      />
+                      <Label htmlFor={item.id}>{item.title}</Label>
+                    </div>
+                  ))}
+                </fieldset>
+                {hinge === "Onsys Hinges" && (
+                  <Select onChange={(e) => totalValue(e.target.value)}>
+                    <option value="">Select</option>
+                    {onsysHinge.map((item) => (
+                      <option value={item.Price}>{item.title}</option>
+                    ))}
+                  </Select>
+                )}
+                {hinge === "Intermat Hinge" && (
+                  <Select onChange={(e) => totalValue(e.target.value)}>
+                    <option value="">Select</option>
+                    {intermatHinge.map((item) => (
+                      <option value={item.Price}>{item.title}</option>
+                    ))}
+                  </Select>
+                )}
+                {hinge === "Sensys hinge" && (
+                  <Select onChange={(e) => totalValue(e.target.value)}>
+                    <option value="">Select</option>
+                    {sensysHinge.map((item) => (
+                      <option value={item.Price}>{item.title}</option>
+                    ))}
+                  </Select>
+                )}
+                <fieldset
+                  className="flex items-center justify-around gap-4 space-y-2"
+                  id="radio"
+                >
+                  <legend className="text-white">
+                    Choose your Flat Fitting
+                  </legend>
+                  {FlatFittingType.map((item) => (
+                    <div className="flex items-center gap-2">
+                      <Radio
+                        id={item.id}
+                        name="flap-fitting"
+                        value={item.id}
+                        defaultChecked={true}
+                        onClick={() => setFlapFillting(item.title)}
+                      />
+                      <Label htmlFor={item.id}>{item.title}</Label>
+                    </div>
+                  ))}
+                </fieldset>
+                {FlapFillting === "Lift Up - Top Box Lift" && (
+                  <Select onChange={(e) => totalValue(e.target.value)}>
+                    <option value="">Select</option>
+                    {liftUp.map((item) => (
+                      <option value={item.Price}>{item.title}</option>
+                    ))}
+                  </Select>
+                )}
+                {FlapFillting === "Flap Stay Lift Basis" && (
+                  <Select onChange={(e) => totalValue(e.target.value)}>
+                    <option value="">Select</option>
+                    {flpStay.map((item) => (
+                      <option value={item.Price}>{item.title}</option>
+                    ))}
+                  </Select>
+                )}
                 <div className="w-full space-y-2">
                   <div className="mb-2 block">
                     <Label
                       className="text-xl text-white"
-                      htmlFor="carcase"
-                      value="carcase"
+                      htmlFor="FoldingSystem"
+                      value="Folding System"
                     />
                   </div>
                   <Select
                     onChange={(e) => totalValue(e.target.value)}
-                    id="carcase"
+                    id="FoldingSystem"
                   >
-                    <option value="">Select Carcases</option>
-                    {carcases.map((item) => (
+                    <option value="">Select Folding System</option>
+                    {foldingSystem.map((item) => (
                       <option value={item.Price}>{item.title}</option>
                     ))}
                   </Select>
@@ -97,70 +176,16 @@ function Estimate() {
                   <div className="mb-2 block">
                     <Label
                       className="text-xl text-white"
-                      htmlFor="shutter"
-                      value="shutter"
+                      htmlFor="SlidingFoldingSystem"
+                      value="Sliding and Folding System"
                     />
                   </div>
                   <Select
                     onChange={(e) => totalValue(e.target.value)}
-                    id="shutter"
+                    id="SlidingFoldingSystem"
                   >
-                    <option>Select Shutter</option>
-                    {Shutter.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
-                    ))}
-                  </Select>
-                </div>
-                <div className="w-full space-y-2">
-                  <div className="mb-2 block">
-                    <Label
-                      className="text-xl text-white"
-                      htmlFor="shelf"
-                      value="shelf"
-                    />
-                  </div>
-                  <Select
-                    id="shelf"
-                    onChange={(e) => totalValue(e.target.value)}
-                  >
-                    <option>Select Shelf</option>
-                    {Shelf.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
-                    ))}
-                  </Select>
-                </div>
-                <div className="w-full space-y-2">
-                  <div className="mb-2 block">
-                    <Label
-                      className="text-xl text-white"
-                      htmlFor="drawer"
-                      value="Drawer"
-                    />
-                  </div>
-                  <Select
-                    onChange={(e) => totalValue(e.target.value)}
-                    id="drawer"
-                  >
-                    <option>Select Drawer</option>
-                    {Drawer.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
-                    ))}
-                  </Select>
-                </div>
-                <div className="w-full space-y-2">
-                  <div className="mb-2 block">
-                    <Label
-                      className="text-xl text-white"
-                      htmlFor="visible"
-                      value="Visible"
-                    />
-                  </div>
-                  <Select
-                    onChange={(e) => totalValue(e.target.value)}
-                    id="visible"
-                  >
-                    <option>Select Visibles</option>
-                    {visible.map((item) => (
+                    <option value="">Select Sliding and Folding System</option>
+                    {slidingAndFoldingSystem.map((item) => (
                       <option value={item.Price}>{item.title}</option>
                     ))}
                   </Select>
@@ -171,9 +196,9 @@ function Estimate() {
               <div className="bg-[#30355A] h-[400px] w-[400px] shadow-md xl:rounded-2xl md:rounded-2xl flex flex-col items-center justify-center space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-center justify-around">
-                    {charge.map((item) => (
-                      <p className="px-1 bg-gray-50 rounded-md">{item}</p>
-                    ))}
+                    {/* {charge.map((item) => ( */}
+                    <p className="px-1 bg-gray-50 rounded-md">{charge}</p>
+                    {/* ))} */}
                   </div>
                   <h1 className="text-2xl text-white font-serif font-semibold">
                     Total Payment is
@@ -217,4 +242,4 @@ function Estimate() {
   );
 }
 
-export default Estimate;
+export default Hettich;
