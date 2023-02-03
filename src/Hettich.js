@@ -21,27 +21,17 @@ import Sidebar from "./Sidebar";
 
 function Hettich() {
   const [charge, setCharge] = useState(0);
-  const [sqFeet, setSqFeet] = useState(0);
   const [rupee, setRupee] = useState(0);
   const [hinge, setHinge] = useState("Onsys Hinges");
   const [FlapFillting, setFlapFillting] = useState("Lift Up - Top Box Lift");
 
   const totalValue = (e) => {
-    // const fittingCharges = sqFeet * 150;
-    // const misCharges = sqFeet * 75;
-    // console.log(charge);
-    // if (charge.length > 3) {
-    //   alert("you cannot add more");
-    // } else {
-    //   setCharge((d) => [...d, e]);
-    // }
-    // const sum = charge.map((item) => parseInt(item)).reduce((p, a) => p + a, 0);
     setCharge(e);
     const totalAmmount = e;
     const less = 35 / 100;
     const GST = 18 / 100;
     const discount = totalAmmount - totalAmmount * less;
-    const totalValue = setRupee(discount + discount * GST);
+    setRupee(discount + discount * GST);
   };
 
   const Header = () => {
@@ -217,7 +207,7 @@ function Hettich() {
                 <div className="flex items-center justify-between space-x-10">
                   <div>
                     <h1 className="text-xl text-white font-serif ">Discount</h1>
-                    <p className="text-lg text-white font-serif ">10%</p>
+                    <p className="text-lg text-white font-serif ">35%</p>
                   </div>
                   <div>
                     <h1 className="text-xl text-white font-serif ">GST</h1>

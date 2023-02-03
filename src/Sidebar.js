@@ -6,11 +6,11 @@ function Sidebar() {
   const PN = location.pathname;
   const navigate = useNavigate();
   return (
-    <div className="w-full h-full space-y-5 xl:flex md:flex flex-col items-center justify-center hidden">
+    <div className="w-full h-full space-y-5 xl:flex md:flex flex-col items-center justify-center hidden bg-[#30355A]">
       <h1
         onClick={() => navigate("/")}
         className={`text-[15px] font-semibold  font-serif cursor-pointer px-1 py-2 rounded-md ${
-          PN === "/" && "bg-[#30355A] text-white"
+          PN === "/" && "bg-[#232949] text-white"
         }`}
       >
         Outer-Quotation
@@ -18,7 +18,7 @@ function Sidebar() {
       <h1
         onClick={() => navigate("/hettich")}
         className={`text-[15px] font-semibold  font-serif cursor-pointer px-1 py-2 rounded-md ${
-          PN === "/hettich" && "bg-[#30355A] text-white"
+          PN === "/hettich" && "bg-[#232949] text-white"
         }`}
       >
         Hettich-Quotation
