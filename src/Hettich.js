@@ -20,15 +20,18 @@ import {
 import Sidebar from "./Sidebar";
 
 function Hettich() {
-  const [charge, setCharge] = useState(0);
+  const [charge, setCharge] = useState([]);
   const [rupee, setRupee] = useState(0);
   const [hinge, setHinge] = useState("Onsys Hinges");
   const [FlapFillting, setFlapFillting] = useState("Lift Up - Top Box Lift");
 
   const totalValue = (e) => {
-    setCharge(e);
-    const totalAmmount = e;
-    const less = 35 / 100;
+    setCharge((d) => [...d, e]);
+    const sum = charge.map((item) => parseInt(item)).reduce((p, a) => p + a, 0);
+    console.log(sum);
+    console.log(charge);
+    const totalAmmount = sum;
+    const less = 5 / 100;
     const GST = 18 / 100;
     const discount = totalAmmount - totalAmmount * less;
     setRupee(discount + discount * GST);
@@ -88,7 +91,16 @@ function Hettich() {
                   <Select onChange={(e) => totalValue(e.target.value)}>
                     <option value="">Select</option>
                     {onsysHinge.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
+                      <option
+                        className={`${
+                          charge.find((price) => parseInt(price) === item.Price)
+                            ? "bg-gray-400"
+                            : "bg-white"
+                        }`}
+                        value={item.Price}
+                      >
+                        {item.title}
+                      </option>
                     ))}
                   </Select>
                 )}
@@ -96,7 +108,16 @@ function Hettich() {
                   <Select onChange={(e) => totalValue(e.target.value)}>
                     <option value="">Select</option>
                     {intermatHinge.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
+                      <option
+                        className={`${
+                          charge.find((price) => parseInt(price) === item.Price)
+                            ? "bg-gray-400"
+                            : "bg-white"
+                        }`}
+                        value={item.Price}
+                      >
+                        {item.title}
+                      </option>
                     ))}
                   </Select>
                 )}
@@ -104,7 +125,16 @@ function Hettich() {
                   <Select onChange={(e) => totalValue(e.target.value)}>
                     <option value="">Select</option>
                     {sensysHinge.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
+                      <option
+                        className={`${
+                          charge.find((price) => parseInt(price) === item.Price)
+                            ? "bg-gray-400"
+                            : "bg-white"
+                        }`}
+                        value={item.Price}
+                      >
+                        {item.title}
+                      </option>
                     ))}
                   </Select>
                 )}
@@ -132,7 +162,16 @@ function Hettich() {
                   <Select onChange={(e) => totalValue(e.target.value)}>
                     <option value="">Select</option>
                     {liftUp.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
+                      <option
+                        className={`${
+                          charge.find((price) => parseInt(price) === item.Price)
+                            ? "bg-gray-400"
+                            : "bg-white"
+                        }`}
+                        value={item.Price}
+                      >
+                        {item.title}
+                      </option>
                     ))}
                   </Select>
                 )}
@@ -140,7 +179,16 @@ function Hettich() {
                   <Select onChange={(e) => totalValue(e.target.value)}>
                     <option value="">Select</option>
                     {flpStay.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
+                      <option
+                        className={`${
+                          charge.find((price) => parseInt(price) === item.Price)
+                            ? "bg-gray-400"
+                            : "bg-white"
+                        }`}
+                        value={item.Price}
+                      >
+                        {item.title}
+                      </option>
                     ))}
                   </Select>
                 )}
@@ -153,12 +201,23 @@ function Hettich() {
                     />
                   </div>
                   <Select
-                    onChange={(e) => totalValue(e.target.value)}
+                    onChange={(e) => {
+                      totalValue(e.target.value);
+                    }}
                     id="FoldingSystem"
                   >
                     <option value="">Select Folding System</option>
                     {foldingSystem.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
+                      <option
+                        className={`${
+                          charge.find((price) => parseInt(price) === item.Price)
+                            ? "bg-gray-400"
+                            : "bg-white"
+                        }`}
+                        value={item.Price}
+                      >
+                        {item.title}
+                      </option>
                     ))}
                   </Select>
                 </div>
@@ -176,7 +235,16 @@ function Hettich() {
                   >
                     <option value="">Select Sliding and Folding System</option>
                     {slidingAndFoldingSystem.map((item) => (
-                      <option value={item.Price}>{item.title}</option>
+                      <option
+                        className={`${
+                          charge.find((price) => parseInt(price) === item.Price)
+                            ? "bg-gray-400"
+                            : "bg-white"
+                        }`}
+                        value={item.Price}
+                      >
+                        {item.title}
+                      </option>
                     ))}
                   </Select>
                 </div>
@@ -186,16 +254,16 @@ function Hettich() {
               <div className="bg-[#30355A] h-[400px] w-[400px] shadow-md xl:rounded-2xl md:rounded-2xl flex flex-col items-center justify-center space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-center justify-around">
-                    {/* {charge.map((item) => ( */}
-                    <p className="px-1 bg-gray-50 rounded-md">{charge}</p>
-                    {/* ))} */}
+                    {charge.map((item) => (
+                      <p className="px-1 bg-gray-50 rounded-md">{item}</p>
+                    ))}
                   </div>
                   <h1 className="text-2xl text-white font-serif font-semibold">
                     Total Payment is
                   </h1>
                   {charge.length > 0 ? (
                     <p className="text-2xl text-white font-serif font-semibold text-center">
-                      Rs.<spam className="font-normal">{rupee}</spam>
+                      Rs.<spam className="font-normal">{rupee.toFixed(0)}</spam>
                     </p>
                   ) : (
                     <p className="text-2xl text-white font-serif font-semibold text-center">

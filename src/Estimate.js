@@ -12,18 +12,20 @@ function Estimate() {
   const totalValue = (e) => {
     const fittingCharges = sqFeet * 150;
     const misCharges = sqFeet * 75;
-    console.log(sqFeet);
     if (charge.length > 4) {
       alert("you cannot add more");
     } else {
       setCharge((d) => [...d, e]);
     }
-    const sum = charge.map((item) => parseInt(item)).reduce((p, a) => p + a, 0);
+    const sum = charge
+      .map((item) => parseInt(item))
+      .reduce((p, a) => p + a, 0)
+      .toFixed(0);
     const totalAmmount = sum * sqFeet + fittingCharges + misCharges;
     const less = 5 / 100;
     const GST = 18 / 100;
     const discount = totalAmmount - totalAmmount * less;
-    const totalValue = setRupee(discount + discount * GST);
+    setRupee(discount + discount * GST);
   };
 
   const Header = () => {
@@ -192,7 +194,7 @@ function Estimate() {
                 <div className="flex items-center justify-between space-x-10">
                   <div>
                     <h1 className="text-xl text-white font-serif ">Discount</h1>
-                    <p className="text-lg text-white font-serif ">10%</p>
+                    <p className="text-lg text-white font-serif ">5%</p>
                   </div>
                   <div>
                     <h1 className="text-xl text-white font-serif ">GST</h1>
